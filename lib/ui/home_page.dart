@@ -64,46 +64,46 @@ class HomePage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: ClipRRect(
-  borderRadius: BorderRadius.only(
-    topLeft: Radius.circular(40), // Sudut kiri atas
-    topRight: Radius.circular(40), // Sudut kanan atas
-  ),
-  child: BottomAppBar(
-    shape: const CircularNotchedRectangle(),
-    notchMargin: 10,
-    child: Container(
-      height: 70,
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xFFF44027), Color(0xFFFFC857)],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(40),
+          topRight: Radius.circular(40),
+        ),
+        child: BottomAppBar(
+          shape: const CircularNotchedRectangle(),
+          notchMargin: 10,
+          child: Container(
+            height: 70,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFFF44027), Color(0xFFFFC857)],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.home_outlined, color: Colors.white),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.notifications_none, color: Colors.white),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.add_circle_outline, color: Colors.white),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.person_outline, color: Colors.white),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.home_outlined, color: Colors.white),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.notifications_none, color: Colors.white),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.add_circle_outline, color: Colors.white),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.person_outline, color: Colors.white),
-          ),
-        ],
-      ),
-    ),
-  ),
-),
     );
   }
 }
@@ -198,9 +198,16 @@ class PostItem extends StatelessWidget {
               ),
               Row(
                 children: [
-                  const Icon(Icons.chat_bubble_outline, size: 18),
-                  const SizedBox(width: 5),
-                  Text(comments.toString()),
+                  GestureDetector(
+                    onTap: () => _showCommentModal(context),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.chat_bubble_outline, size: 18),
+                        const SizedBox(width: 5),
+                        Text(comments.toString()),
+                      ],
+                    ),
+                  ),
                 ],
               ),
               const Icon(Icons.mail_outline, size: 18),
@@ -209,6 +216,60 @@ class PostItem extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  // Fungsi untuk menampilkan modal komentar
+  void _showCommentModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.all(16),
+          height: MediaQuery.of(context).size.height * 0.6, // Tinggi modal
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Komentar",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const Divider(),
+              Expanded(
+  child: ListView(
+    children: const [
+      ListTile(
+        leading: CircleAvatar(child: Text("A")),
+        title: Text(
+          "User 1",
+          style: TextStyle(fontWeight: FontWeight.bold), // Menebalkan nama User 1
+        ),
+        subtitle: Text("Komentar pertama!"),
+      ),
+      ListTile(
+        leading: CircleAvatar(child: Text("B")),
+title: Text(
+          "User 2",
+          style: TextStyle(fontWeight: FontWeight.bold), // Menebalkan nama User 1
+        ),        subtitle: Text("Komentar kedua!"),
+      ),
+    ],
+  ),
+),
+            ],
+          ),
+        );
+      },
     );
   }
 }
