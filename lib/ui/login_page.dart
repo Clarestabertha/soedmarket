@@ -12,8 +12,8 @@ class LoginPage extends StatelessWidget {
           children: [
             // Elemen dekoratif lingkaran di sudut kanan bawah
             Positioned(
-              bottom: -50,
-              right: -50,
+              bottom: -110,
+              right: -90,
               child: Container(
                 width: 300,
                 height: 300,
@@ -55,7 +55,7 @@ class LoginPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        'assets/logo.png', // Path logo Anda
+                        'assets/images/logo.png', // Path logo Anda
                         height: 50,
                       ),
                       const SizedBox(width: 8), // Spasi antara logo dan teks
@@ -128,8 +128,8 @@ class LoginPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 32),
                   // Tombol Masuk
-                  ElevatedButton(
-                    onPressed: () {
+                  GestureDetector(
+                    onTap: () {
                       // Navigasi ke halaman HomePage
                       Navigator.pushReplacement(
                         context,
@@ -138,25 +138,27 @@ class LoginPage extends StatelessWidget {
                         ),
                       );
                     },
-                    style: ElevatedButton.styleFrom(
+                    child: Container(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 40,
-                        vertical: 15,
+                        horizontal: 50,
+                        vertical: 7,
                       ),
-                      backgroundColor: const Color(0xFFF44027),
-                      shape: RoundedRectangleBorder(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Color(0xFFFF6F00), Color(0xFFFFD54F)], // Warna gradasi
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      textStyle: const TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
+                      child: const Text(
+                        'Masuk',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white, // Warna teks putih
+                        ),
                       ),
-                    ),
-                    child: const Text(
-                      'Masuk',
-                      style: TextStyle(
-                        color: Colors.white, // Warna teks putih
-                       ),
                     ),
                   ),
                 ],

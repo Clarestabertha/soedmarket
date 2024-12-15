@@ -1,4 +1,6 @@
+// home_page.dart
 import 'package:flutter/material.dart';
+import 'package:soedmarket/ui/messages_page.dart'; // pastikan ini benar
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,7 +21,15 @@ class HomePage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              // Arahkan ke halaman pesan
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MessagesPage(), // Hapus const di sini
+                ),
+              );
+            },
             icon: const Icon(
               Icons.mail_outline,
               color: Colors.black,
@@ -27,6 +37,9 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
+
+
+      
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -42,7 +55,7 @@ class HomePage extends StatelessWidget {
             name: "Nabilla Tsani Ayasi",
             time: "17/11/2024 09:00 AM",
             content: "Hayukk DM aja for order",
-            imageUrl: "cemara.jpg",
+            imageUrl: "assets/images/foto1.png",
             likes: 5,
             comments: 2,
           ),
@@ -63,47 +76,58 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(40),
-          topRight: Radius.circular(40),
-        ),
-        child: BottomAppBar(
-          shape: const CircularNotchedRectangle(),
-          notchMargin: 10,
-          child: Container(
-            height: 70,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xFFF44027), Color(0xFFFFC857)],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.home_outlined, color: Colors.white),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.notifications_none, color: Colors.white),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.add_circle_outline, color: Colors.white),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.person_outline, color: Colors.white),
-                ),
-              ],
-            ),
-          ),
-        ),
+      
+bottomNavigationBar: Padding(
+  padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8), // Padding di kanan, kiri, dan bawah
+  child: Container(
+    height: 60,
+    decoration: const BoxDecoration(
+      gradient: LinearGradient(
+        colors: [Color(0xFFF44027), Color(0xFFFFC857)],
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
       ),
+      borderRadius: BorderRadius.all(
+        Radius.circular(40), // Membulatkan semua sisi
+      ),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black26,
+          blurRadius: 5,
+          offset: Offset(0, 3),
+        ),
+      ],
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.home_outlined, color: Colors.white),
+          iconSize: 28, // Atur ukuran ikon di sini
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.notifications_none, color: Colors.white),
+          iconSize: 28, // Atur ukuran ikon di sini
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.add_circle_outline, color: Colors.white),
+          iconSize: 28, // Atur ukuran ikon di sini
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.person_outline, color: Colors.white),
+          iconSize: 28, // Atur ukuran ikon di sini
+        ),
+      ],
+    ),
+  ),
+),
+
+
+
     );
   }
 }
