@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "61823440788",
+    "project_id": "soed-market",
+    "storage_bucket": "soed-market.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61823440788:android:7b768c07b3acf848fda181",
+        "android_client_info": {
+          "package_name": "com.example.soedmarket"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCcAC1wKlrhwQ8ylQzCqPjagkLx4-MKKA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

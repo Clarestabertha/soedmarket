@@ -1,8 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:soedmarket/ui/home_page.dart';
+import 'package:soedmarket/screens/register_page.dart';
+import 'package:soedmarket/screens/reset_password.dart';
+import 'package:soedmarket/services/auth_service.dart'; // Import the AuthService
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final AuthService _authService = AuthService();
+
+  void _login() async {
+    final user = await _authService.signInWithEmailAndPassword(
+      _emailController.text,
+      _passwordController.text,
+    );
+    if (user != null) {
+      // Login successful, navigate to home page
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      // Login failed, show error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Login Gagal. Silahkan coba lagi.')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +90,7 @@ class LoginPage extends StatelessWidget {
                         'SOEDMARKET',
                         style: TextStyle(
                           fontSize: 30,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                     ],
@@ -80,9 +107,10 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(height: 40),
                   // Form input email
                   TextField(
+                    controller: _emailController,
                     decoration: InputDecoration(
                       labelText: 'Alamat Email',
-                      hintText: 'mahasiswa@gmail.com',
+                      hintText: 'email@unsoed.ac.id',
                       hintStyle: const TextStyle(
                         color: Colors.grey,
                         fontSize: 14,
@@ -104,10 +132,11 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(height: 16),
                   // Form input password
                   TextField(
+                    controller: _passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'Kata Sandi',
-                      hintText: 'Min. 8 Karakter',
+                      hintText: 'masukkan kata sandi',
                       hintStyle: const TextStyle(
                         color: Colors.grey,
                         fontSize: 14,
@@ -126,18 +155,32 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 8),
+                  // Tombol Lupa Kata Sandi
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ResetPasswordPage(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'Lupa Password?',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
                   // Tombol Masuk
                   GestureDetector(
-                    onTap: () {
-                      // Navigasi ke halaman HomePage
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomePage(),
-                        ),
-                      );
-                    },
+                    onTap: _login,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 50,
@@ -158,6 +201,26 @@ class LoginPage extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                           color: Colors.white, // Warna teks putih
                         ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  // Tombol Daftar
+                  GestureDetector(
+                    onTap: () {
+                      // Navigasi ke halaman RegisterPage
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const RegisterPage(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Belum punya akun? Daftar',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.blue, // Warna teks biru
                       ),
                     ),
                   ),

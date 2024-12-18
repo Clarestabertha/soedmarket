@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:soedmarket/ui/login_page.dart';
+import 'package:soedmarket/screens/login_page.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({Key? key}) : super(key: key);
